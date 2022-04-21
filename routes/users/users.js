@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const res_wrap = require('./../tools/envelop');
+const res_wrap = require('../../tools/envelop');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
