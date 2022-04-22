@@ -5,6 +5,7 @@ const envelop = require('./envelop');
 
 module.exports = function(err, req, res, next) {
 
+    console.log(err); // TODO remove this after testing
     
     error = process.env.NODE_ENV === 'development' ? err : {status: err.status, message: err.message } ;
 

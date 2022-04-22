@@ -15,13 +15,13 @@ exports.getUsers = catchAsync(async (req, res, next )=>{
 
 exports.postUsers = catchAsync(async(req, res, next)=>{
   
-  const {email, username} = req.body;
+  const {email, username, password} = req.body;
   
-  if (!email || !username){
-    return next(createError(400, `${!!username?'email':'username'} is required`));
+  if (!email || !username || !password ){
+    return next(createError(400, "valid 'email' 'username' and 'password' are required"));
   }
 
-  const newUser = await schema.create({email, username});
+  const newUser = await schema.create({email, username, password});
 
   return res_wrap(res, 201, {user: newUser});
 
