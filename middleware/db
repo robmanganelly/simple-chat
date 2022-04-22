@@ -6,7 +6,6 @@ mongoose.connect(
         useUnifiedTopology:true
     }
 ).then(()=>{
-    console.log(`connected to mongodb on ${
-        process.env.NODE_ENV === 'development' ? 'dev': 'production'
-    } cluster: ...`);}
-);
+    if (process.env.NODE_ENV === 'development')       
+        console.log(`connected to mongodb on dev cluster: ...`);
+});

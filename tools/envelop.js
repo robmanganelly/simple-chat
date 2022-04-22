@@ -1,6 +1,6 @@
 module.exports = (res, status, data, message)=>{
     
-    
+    // status = !!status ? status: 500;    
 
     return res.status(status).json({
         status,

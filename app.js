@@ -4,8 +4,8 @@ const  path = require('path');
 const  cookieParser = require('cookie-parser');
 const  logger = require('morgan');
 
-const  routes = require('./routes/routes');
-const envelop = require('./tools/envelop');
+const  routes = require('./routes/router');
+
 
 const  app = express();
 
@@ -22,22 +22,14 @@ app.use('/main',express.static(path.join(__dirname, 'public', 'html')));
 
 app.use('/api/v1', routes);
 
-// catch 404 and forward to error handler
+// this is the wildcard code if doesn't touches any route catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  return envelop(res,err.status,res.locals.error,err.message);
-});
+// error handler at the end of the middleware chain
+app.use(require('./tools/error-handler'));
 
 
 module.exports = app;

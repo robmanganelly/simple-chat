@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "debug": " node --require dotenv/config  ./bin/www   ",
     "start": "node --require dotenv/config  ./bin/www",
     "start-dev": " nodemon --require dotenv/config ./bin/www dotenv_config_path=./.env.test"
   },
