@@ -11,6 +11,7 @@ exports.catchAsync = (handler)=>{
 
             // mongoose.
             if(!!err.errors && !!err._message){
+                console.log('mongoose error'); // TODO remove this line after testing
                 return next(createError(400,err.message));
             }
 

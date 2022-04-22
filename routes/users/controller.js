@@ -17,10 +17,9 @@ exports.postUsers = catchAsync(async(req, res, next)=>{
   
   const {email, username} = req.body;
   
-  // TODO restore this.
-  // if (!email || !username){
-  //   return next(createError(400, `${!!username?'email':'username'} is required`));
-  // }
+  if (!email || !username){
+    return next(createError(400, `${!!username?'email':'username'} is required`));
+  }
 
   const newUser = await schema.create({email, username});
 

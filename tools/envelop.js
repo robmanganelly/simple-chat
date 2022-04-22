@@ -1,6 +1,6 @@
 module.exports = (res, status, data, message)=>{
     
-    // status = !!status ? status: 500;    
+    console.log('enveloping'); // TODO remove this line after testing
 
     return res.status(status).json({
         status,

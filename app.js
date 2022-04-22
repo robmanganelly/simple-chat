@@ -1,35 +1,12 @@
-const  createError = require('http-errors');
 const  express = require('express');
-const  path = require('path');
-const  cookieParser = require('cookie-parser');
-const  logger = require('morgan');
-
-const  routes = require('./routes/router');
-
 
 const  app = express();
 
-require('./middleware/db');
+// connection to db
+require('./middleware/db.js');
+// app core middleware  
+require('./middleware/core')(app);
 
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public', 'images')));
-app.use('/main',express.static(path.join(__dirname, 'public', 'html')));
-
-app.use('/api/v1', routes);
-
-// this is the wildcard code if doesn't touches any route catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-
-// error handler at the end of the middleware chain
-app.use(require('./tools/error-handler'));
 
 
 module.exports = app;
