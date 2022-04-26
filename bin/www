@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+const { Server } =  require('socket.io');
 
 // environment variables are required on launching commands.
 
@@ -23,8 +23,15 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-const io  = require('socket.io')(server);
+const io  = new Server(server,{
+  cors: {
+    origin: "*",
 
+  }
+});
+
+
+require('./../tools/socket-config')(io); 
 /**
  * Listen on provided port, on all network interfaces.
  */

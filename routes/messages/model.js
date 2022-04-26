@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
     sent:{
         type: Date,
         default: Date.now()
+    },
+    room:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
     }
 });
 

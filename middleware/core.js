@@ -5,7 +5,13 @@ const  morgan = require('morgan');
 const  express = require('express');
 const errorHandler = require('./../tools/error-handler');
 const  routes = require('./../routes/router');
+const cors = require('cors');
 
+
+const corsOptions = {
+    origin: '*',
+    methods: ['GET','PUT', 'POST', 'DELETE', 'PATCH', 'OPTIONS']
+};
 
 module.exports = function(app){
     
@@ -15,6 +21,7 @@ module.exports = function(app){
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
+    app.use(process.env.NODE_ENV === 'production' ? cors() : cors(corsOptions));
     
     //static routes
     app.use(express.static(path.join(__dirname,'..','public')));
